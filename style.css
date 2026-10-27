@@ -27,10 +27,15 @@ body {
     align-items: center;
 }
 
+h1 {
+    color: #fff;
+}
+
 form {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
+    color: #fff;
 }
 
 form button {
