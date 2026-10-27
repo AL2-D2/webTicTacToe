@@ -6,8 +6,13 @@
     box-sizing: border-box;
 }
 
+:root{
+    --bgc: #233342;
+    --intense-color: #111c25ab;
+}
+
 body {
-    background-color: #233342;
+    background-color: var(--bgc);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,4 +56,14 @@ form button {
     padding: 10px;
     border-radius: 7px;
     border: none;
+}
+
+.game-board{
+    display:grid;
+}
+
+.box{
+    width: 70px;
+    height: 70px;
+    background-color: var(--intense-color);
 }
