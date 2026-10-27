@@ -64,6 +64,10 @@ form button {
     border: none;
 }
 
+form input:focus{
+    outline: 2px solid rgb(152, 140, 140);
+}
+
 .game-container {
     display: flex;
     flex-direction: column;
