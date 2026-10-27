@@ -27,8 +27,12 @@ body {
     align-items: center;
 }
 
-h1 {
+.info-container h1 {
     color: #fff;
+    margin-bottom: 25px;
+    letter-spacing: 7px;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
 }
 
 form {
