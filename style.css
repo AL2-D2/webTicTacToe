@@ -49,8 +49,12 @@ form {
     color: #fff;
 }
 
-form button {
-    grid-column: 1/-1;
+form button{
+    grid-column: 1/-1;    
+}
+
+button:hover{
+    cursor: pointer;
 }
 
 form input,
@@ -117,7 +121,6 @@ form button {
 
 .restart:hover {
     background-color: #fff;
-    border: 1px solid black;
-    cursor: pointer;
+    border: 1px solid black;    
     color: var(--bgc);
 }
