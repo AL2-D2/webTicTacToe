@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
 </head>
+
 <body>
     <div class="main-container">
         <div>
@@ -12,12 +14,31 @@
             <form>
                 <label for="player-x-name">Player X</label>
                 <input type="text" id="player-x-name" name="player-x-name">
-                <label for="player-O-name">Player O</label>
-                <input type="text" id="player-O-name" name="player-O-name">    
+                <label for="player-o-name">Player O</label>
+                <input type="text" id="player-o-name" name="player-o-name">
                 <button type="submit">Start New Game</button>
             </form>
         </div>
-        <div></div>
+        <div>
+            <p class="turn"><span class="player-turn-name"></span>Turn</p>
+            <div class="game-container">
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+            </div>
+            <div class="bottom-container">
+                <span class="player-x-score"></span>
+                <button class="restart">Restart</button>
+                <span class="player-o-sccore"></span>
+            </div>
+        </div>
     </div>
 </body>
+
 </html>
