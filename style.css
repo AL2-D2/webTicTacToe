@@ -51,6 +51,11 @@ form {
 
 form button{
     grid-column: 1/-1;    
+    transition: all 0.2s ease;
+}
+
+form button:hover{
+    background-color: #dfdfdf;
 }
 
 button:hover{
