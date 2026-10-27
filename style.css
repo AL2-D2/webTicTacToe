@@ -100,8 +100,16 @@ form button {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
-.bottom-container span{
+.bottom-container *{
     color: #fff;
+}
+
+.restart{
+    background-color: inherit;   
+    border: 1px solid #fff;
+    padding: 8px 16px 8px 16px;
+    border-radius: 15px;
 }
