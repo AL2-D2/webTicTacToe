@@ -1,18 +1,28 @@
-*,*::before,*::after{
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-body{
+
+body {
     background-color: #233342;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.main-container{
+
+.main-container {
     height: 100vh;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+
+.info-container {
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
