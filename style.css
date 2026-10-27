@@ -60,7 +60,7 @@ form button {
     border: none;
 }
 
-.game-container{
+.game-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -89,34 +89,34 @@ form button {
     cursor: pointer;
 }
 
-.turn{
+.turn {
     color: #ffffff;
     background-color: var(--intense-color);
     padding: 8px 16px 8px 16px;
     border-radius: 15px;
 }
 
-.bottom-container{
+.bottom-container {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.bottom-container *{
+.bottom-container * {
     color: #fff;
 }
 
-.restart{
-    background-color: inherit;   
+.restart {
+    background-color: inherit;
     border: 1px solid #fff;
     padding: 8px 16px 8px 16px;
     border-radius: 15px;
     transition: all 0.2s ease;
 }
 
-.restart:hover{
-    background-color: #fff;   
+.restart:hover {
+    background-color: #fff;
     border: 1px solid black;
     cursor: pointer;
     color: var(--bgc);
