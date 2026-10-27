@@ -6,7 +6,7 @@
     box-sizing: border-box;
 }
 
-:root{
+:root {
     --bgc: #233342;
     --intense-color: #111c25ab;
 }
@@ -59,17 +59,23 @@ form button {
     border: none;
 }
 
-.game-board{
-    display:grid;
-    grid-template-columns: repeat(3,1fr);
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 15px;
     margin-top: 25px;
     margin-bottom: 25px;
 }
 
-.box{
+.box {
     width: 150px;
     height: 150px;
     background-color: var(--intense-color);
-    border-radius: 15px;    
+    border-radius: 15px;
+    transition: all 0.125s ease;
+}
+
+.box:hover {
+    background-color: #111c25ea;
+    cursor: pointer;
 }
