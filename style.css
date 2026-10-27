@@ -5,4 +5,14 @@
 }
 body{
     background-color: #233342;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-container{
+    height: 100vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
