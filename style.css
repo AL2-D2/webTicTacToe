@@ -73,6 +73,7 @@ form button {
     background-color: var(--intense-color);
     border-radius: 15px;
     transition: all 0.125s ease;
+    box-shadow: 0 5px 1px 0 black;
 }
 
 .box:hover {
