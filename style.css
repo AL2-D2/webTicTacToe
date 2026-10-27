@@ -112,4 +112,12 @@ form button {
     border: 1px solid #fff;
     padding: 8px 16px 8px 16px;
     border-radius: 15px;
+    transition: all 0.2s ease;
+}
+
+.restart:hover{
+    background-color: #fff;   
+    border: 1px solid black;
+    cursor: pointer;
+    color: var(--bgc);
 }
