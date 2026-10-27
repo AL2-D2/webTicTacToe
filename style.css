@@ -60,10 +60,12 @@ form button {
 
 .game-board{
     display:grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 15px;
 }
 
 .box{
-    width: 70px;
-    height: 70px;
+    width: 150px;
+    height: 150px;
     background-color: var(--intense-color);
 }
