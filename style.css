@@ -59,6 +59,13 @@ form button {
     border: none;
 }
 
+.game-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .game-board {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -79,4 +86,11 @@ form button {
 .box:hover {
     background-color: #111c25ea;
     cursor: pointer;
+}
+
+.turn{
+    color: #ffffff;
+    background-color: var(--intense-color);
+    padding: 8px 16px 8px 16px;
+    border-radius: 15px;
 }
