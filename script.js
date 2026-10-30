@@ -8,6 +8,12 @@ function Player(gameMarkSelection, board) {
 
             selectedCell = parseInt(prompt(`Which cell? (${playerMark})`));
 
+            /* 'board.boardCells[0][selectedCell - (number)]' selects the board cell considering the board as:
+             1-2-3
+             4-5-6
+             7-8-9
+             so if user selects 5, marks the boardCells[1][5 - 4] which is boardCells[1][1], center part of the board in this logic...
+            */
             if (selectedCell <= 3 && board.boardCells[0][selectedCell - 1] === "") {
                 board.boardCells[0][selectedCell - 1] = playerMark;
             }
