@@ -54,28 +54,36 @@ const Game = (() => {
     const player1 = Player("X", board);
     const player2 = Player("O", board);
     let turn = 0;
-    const playTurn = () => {  
-        while(turn < 4){
-            turn++     
-            player1.markCell();            
+    const playTurn = () => {
+        while (turn < 5) {
+            turn++
+            player1.markCell();
             if (checkWinConditionAndReturnWinner() === player1) {
-                alert(`winner is: ${player1.getPlayerMark()}`);    
-                break;            
+                alert(`winner is: ${player1.getPlayerMark()}`);
+                break;
             }
-            player2.markCell();            
+            if (checkDrawCondition()) {
+                alert("draw");
+                break;
+            }
+            player2.markCell();
             if (checkWinConditionAndReturnWinner() === player2) {
-                alert(`winner is: ${player2.getPlayerMark()}`); 
-                break;               
-            }            
-            board.getBoardStatus();                               
+                alert(`winner is: ${player2.getPlayerMark()}`);
+                break;
             }
+            if (checkDrawCondition()) {
+                alert("draw");
+                break;
+            }
+            board.getBoardStatus();
+        }
     }
 
     const checkWinConditionAndReturnWinner = () => {
         for (let i = 0; i < 3; i++) {
             // horizontal checks
             if ((board.boardCells[i][0] === board.boardCells[i][1] && board.boardCells[i][1] === board.boardCells[i][2]) && board.boardCells[i][0] != "") {
-                if (board.boardCells[i][0] === player1.getPlayerMark()) {                    
+                if (board.boardCells[i][0] === player1.getPlayerMark()) {
                     return player1;
                 }
                 else {
@@ -115,7 +123,22 @@ const Game = (() => {
         }
     }
 
+    const checkDrawCondition = () => {
+        let filledCell = 0;
+        for (let rowCell of board.boardCells) {
+            for (let cell of rowCell) {
+                if (cell !== "") {
+                    filledCell++;
+                }
+            }
+        }
+        if (filledCell === 9 && (checkWinConditionAndReturnWinner() !== player1 && checkWinConditionAndReturnWinner() !== player2)) {
+            return true;
+        }
+        else { return false; }
+    }
+
     return { playTurn };
 })();
-    
+
 Game.playTurn();
