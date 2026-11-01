@@ -1,33 +1,17 @@
-function Player(gameMarkSelection, board) {
+const cellBoxesList = document.querySelectorAll(".box");
+const cellBoxes = Array.from(cellBoxesList);
+
+function Player(gameMarkSelection) {
     const playerMark = gameMarkSelection;
 
-    const markCell = () => {
-        let selectedCell = 0;
-
-        while (selectedCell <= 0 || selectedCell > 9) {
-
-            selectedCell = parseInt(prompt(`Which cell? (${playerMark})`));
-
-            /* 'board.boardCells[0][selectedCell - (number)]' selects the board cell considering the board as:
-             1-2-3
-             4-5-6
-             7-8-9
-             so if user selects 5, marks the boardCells[1][5 - 4] which is boardCells[1][1], center part of the board in this logic...
-            */
-            if (selectedCell <= 3 && board.boardCells[0][selectedCell - 1] === "") {
-                board.boardCells[0][selectedCell - 1] = playerMark;
-            }
-            else if (selectedCell > 3 && selectedCell <= 6 && board.boardCells[1][selectedCell - 4] === "") {
-                board.boardCells[1][selectedCell - 4] = playerMark;
-            }
-            else if (selectedCell > 6 && selectedCell <= 9 && board.boardCells[2][selectedCell - 7] === "") {
-                board.boardCells[2][selectedCell - 7] = playerMark;
-            }
-            else {
-                selectedCell = 0;
-            }
-        }
+    const markCell = (box) => {                           
+            if (box.target.innerText === "") {
+                box.target.innerText = playerMark;
+            }                            
     }
+
+    cellBoxes.forEach((cell) => cell.addEventListener("click", markCell));
+
     const getPlayerMark = () => {
         return playerMark;
     };
@@ -35,11 +19,13 @@ function Player(gameMarkSelection, board) {
 }
 
 function Board() {
-    let boardCells = [
-        ["", "", ""],
-        ["", "", ""],
-        ["", "", ""]
-    ];
+    let boardCells = cellBoxes.reduce((acc, _, index) => {
+        let chunkSize = 3;
+        if (index % chunkSize === 0) {
+            acc.push(cellBoxes.slice(index, index + chunkSize));
+        }
+        return acc;
+    }, []);
 
     function getBoardStatus() {
         boardCells.forEach((row) => row.forEach((column) => {
@@ -141,5 +127,3 @@ const Game = (() => {
 
     return { playTurn };
 })();
-
-Game.playTurn();
