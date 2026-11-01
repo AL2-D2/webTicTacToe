@@ -53,10 +53,10 @@ const Game = (() => {
     const board = Board();
     const player1 = Player("X", board);
     const player2 = Player("O", board);
-    let turn = 0;
+    
     const playTurn = () => {
-        while (turn < 5) {
-            turn++
+        while (true) {
+            
             player1.markCell();
             if (checkWinConditionAndReturnWinner() === player1) {
                 alert(`winner is: ${player1.getPlayerMark()}`);
