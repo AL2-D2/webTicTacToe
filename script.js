@@ -1,7 +1,7 @@
 function Player(gameMarkSelection, board) {
     const playerMark = gameMarkSelection;
 
-    const MarkCell = () => {
+    const markCell = () => {
         let selectedCell = 0;
 
         while (selectedCell <= 0 || selectedCell > 9) {
@@ -28,12 +28,18 @@ function Player(gameMarkSelection, board) {
             }
         }
     }
-
-    return { MarkCell };
+    const getPlayerMark = () => {
+        return playerMark;
+    };
+    return { markCell, getPlayerMark };
 }
 
 function Board() {
-    let boardCells = [["", "", ""], ["", "", ""], ["", "", ""]];
+    let boardCells = [
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""]
+    ];
 
     function getBoardStatus() {
         boardCells.forEach((row) => row.forEach((column) => {
@@ -48,22 +54,68 @@ const Game = (() => {
     const player1 = Player("X", board);
     const player2 = Player("O", board);
     let turn = 0;
-    const playTurn = () => {
-        while (turn < 4) {
-            player1.MarkCell();
-            player2.MarkCell();
-            console.log(turn);
-            board.getBoardStatus();
-            turn++;
-        }
+    const playTurn = () => {  
+        while(turn < 4){
+            turn++     
+            player1.markCell();            
+            if (checkWinConditionAndReturnWinner() === player1) {
+                alert(`winner is: ${player1.getPlayerMark()}`);    
+                break;            
+            }
+            player2.markCell();            
+            if (checkWinConditionAndReturnWinner() === player2) {
+                alert(`winner is: ${player2.getPlayerMark()}`); 
+                break;               
+            }            
+            board.getBoardStatus();                               
+            }
     }
 
-    const checkIfWon = () => {
+    const checkWinConditionAndReturnWinner = () => {
+        for (let i = 0; i < 3; i++) {
+            // horizontal checks
+            if ((board.boardCells[i][0] === board.boardCells[i][1] && board.boardCells[i][1] === board.boardCells[i][2]) && board.boardCells[i][0] != "") {
+                if (board.boardCells[i][0] === player1.getPlayerMark()) {                    
+                    return player1;
+                }
+                else {
+                    return player2;
+                }
+            }
+        }
 
+        for (let i = 0; i < 3; i++) {
+            // vertical checks
+            if ((board.boardCells[0][i] === board.boardCells[1][i] && board.boardCells[1][i] === board.boardCells[2][i] && board.boardCells[0][i] != "")) {
+                if (board.boardCells[0][i] === player1.getPlayerMark()) {
+                    return player1;
+                }
+                else {
+                    return player2;
+                }
+            }
+        }
+        // left diagonal check
+        if ((board.boardCells[0][0] === board.boardCells[1][1] && board.boardCells[1][1] === board.boardCells[2][2]) && board.boardCells[0][0] != "") {
+            if (board.boardCells[0][0] === player1.getPlayerMark()) {
+                return player1;
+            }
+            else {
+                return player2;
+            }
+        }
+        // right diagonal check
+        if ((board.boardCells[0][2] === board.boardCells[1][1] && board.boardCells[1][1] === board.boardCells[2][0]) && board.boardCells[0][2] != "") {
+            if (board.boardCells[0][2] === player1.getPlayerMark()) {
+                return player1;
+            }
+            else {
+                return player2;
+            }
+        }
     }
 
     return { playTurn };
 })();
-
-
+    
 Game.playTurn();
