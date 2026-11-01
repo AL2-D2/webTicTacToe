@@ -50,29 +50,18 @@ function Board() {
 }
 
 const Game = (() => {
+    let gameFinished = false;
+
     const board = Board();
     const player1 = Player("X", board);
     const player2 = Player("O", board);
-    
+
     const playTurn = () => {
-        while (true) {
-            
-            player1.markCell();
-            if (checkWinConditionAndReturnWinner() === player1) {
-                alert(`winner is: ${player1.getPlayerMark()}`);
+        while (!gameFinished) {
+            if (playerPlayTurn(player1)) {
                 break;
             }
-            if (checkDrawCondition()) {
-                alert("draw");
-                break;
-            }
-            player2.markCell();
-            if (checkWinConditionAndReturnWinner() === player2) {
-                alert(`winner is: ${player2.getPlayerMark()}`);
-                break;
-            }
-            if (checkDrawCondition()) {
-                alert("draw");
+            if (playerPlayTurn(player2)) {
                 break;
             }
             board.getBoardStatus();
@@ -136,6 +125,18 @@ const Game = (() => {
             return true;
         }
         else { return false; }
+    }
+
+    function playerPlayTurn(player) {
+        player.markCell();
+        if (checkWinConditionAndReturnWinner() === player) {
+            alert(`winner is: ${player.getPlayerMark()}`);
+            return true;
+        }
+        if (checkDrawCondition()) {
+            alert("draw");
+            return true;
+        }
     }
 
     return { playTurn };
