@@ -1,6 +1,7 @@
 const cellBoxesList = document.querySelectorAll(".box");
 const cellBoxes = Array.from(cellBoxesList);
 const startButton = document.querySelector("#start-game-btn");
+const restartButton = document.querySelector(".restart-button");
 
 function Player(gameMarkSelection) {
     const playerMark = gameMarkSelection;
@@ -28,7 +29,11 @@ function Board() {
         return acc;
     }, []);
 
-    return { boardCells };
+    const clearBoard = () => {
+        cellBoxes.forEach(cell => cell.innerText = "");
+    };
+
+    return { boardCells, clearBoard };
 }
 
 const Game = (() => {
@@ -41,6 +46,7 @@ const Game = (() => {
     let gameActive = false;
 
     const play = () => {
+        board.clearBoard();
         currentPlayer = player1;
         gameActive = true;
     }
@@ -143,4 +149,5 @@ const Game = (() => {
     return { play };
 })();
 
-startButton.addEventListener("click", Game.play)
+startButton.addEventListener("click", Game.play);
+restartButton.addEventListener("")
