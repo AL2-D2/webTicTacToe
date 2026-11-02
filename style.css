@@ -95,6 +95,10 @@ button:hover {
     border-radius: 15px;
     transition: all 0.125s ease;
     box-shadow: 0 5px 3px 0 black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 6rem;    
 }
 
 .box:hover {
