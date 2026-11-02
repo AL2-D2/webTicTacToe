@@ -42,19 +42,19 @@ body {
     text-decoration-thickness: 2px;
 }
 
-form {
+.form {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
     color: #fff;
 }
 
-form button{
+.form button{
     grid-column: 1/-1;    
     transition: all 0.2s ease;
 }
 
-form button:hover{
+.form button:hover{
     background-color: #dfdfdf;
 }
 
@@ -62,14 +62,14 @@ button:hover{
     cursor: pointer;
 }
 
-form input,
-form button {
+.form input,
+.form button {
     padding: 10px;
     border-radius: 7px;
     border: none;
 }
 
-form input:focus{
+.form input:focus{
     outline: 2px solid rgb(152, 140, 140);
 }
 

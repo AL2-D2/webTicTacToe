@@ -7,9 +7,10 @@ function Player(gameMarkSelection) {
 
     const markCell = (box) => {
         if (box.target.innerText === "") {
-            box.target.innerText = playerMark;            
+            box.target.innerText = playerMark;
+            return true;
         }
-        
+        return false;
     }
 
     const getPlayerMark = () => {
@@ -36,14 +37,12 @@ const Game = (() => {
     const player1 = Player("X");
     const player2 = Player("O");
 
-    
+    let currentPlayer = player1;
+    let gameActive = false;
 
-    const play = () => {           
-            if(playerPlayTurn(player1)){ 
-                console.log("finished");
-            }                   
-            if(playerPlayTurn(player2)){                
-            }            
+    const play = () => {
+        currentPlayer = player1;
+        gameActive = true;
     }
 
     const checkWinConditionAndReturnWinner = () => {
@@ -105,7 +104,7 @@ const Game = (() => {
         else { return false; }
     }
 
-    function playerPlayTurn(player) {        
+    function playerPlayTurn(player) {
         board.boardCells.forEach((row) => row.forEach((cell) => cell.addEventListener("click", player.markCell)));
         if (checkWinConditionAndReturnWinner() === player) {
             alert(`winner is: ${player.getPlayerMark()}`);
@@ -116,6 +115,30 @@ const Game = (() => {
             return true;
         }
     }
+
+    const handleCellClick = (e) => {
+        if (!gameActive) {
+            return;
+        }
+
+        const markSuccess = currentPlayer.markCell(e);
+
+        if (markSuccess) {
+            const winner = checkWinConditionAndReturnWinner();
+            if (winner) {
+                gameActive = false;
+                return;
+            }
+
+            if (checkDrawCondition()) {
+                gameActive = false;
+            }
+
+            currentPlayer = currentPlayer === player1 ? player2 : player1;
+        }
+    }
+
+    cellBoxes.forEach((cell) => cell.addEventListener("click", handleCellClick));
 
     return { play };
 })();
