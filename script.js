@@ -99,13 +99,9 @@ const Game = (() => {
             // horizontal checks
             if ((board.boardCells[i][0].innerText === board.boardCells[i][1].innerText && board.boardCells[i][1].innerText === board.boardCells[i][2].innerText) && board.boardCells[i][0].innerText != "") {
                 if (board.boardCells[i][0].innerText === player1.getPlayerMark()) {
-                    player1.incrementScore();
-                    dataManager.changeUserPoints(player1.getScore(), player2.getScore());
                     return player1;
                 }
                 else {
-                    player2.incrementScore();
-                    dataManager.changeUserPoints(player1.getScore(), player2.getScore());
                     return player2;
                 }
             }
@@ -115,13 +111,9 @@ const Game = (() => {
             // vertical checks
             if ((board.boardCells[0][i].innerText === board.boardCells[1][i].innerText && board.boardCells[1][i].innerText === board.boardCells[2][i].innerText && board.boardCells[0][i].innerText != "")) {
                 if (board.boardCells[0][i].innerText === player1.getPlayerMark()) {
-                    player1.incrementScore();
-                    dataManager.changeUserPoints(player1.getScore(), player2.getScore());
                     return player1;
                 }
                 else {
-                    player2.incrementScore();
-                    dataManager.changeUserPoints(player1.getScore(), player2.getScore());
                     return player2;
                 }
             }
@@ -129,26 +121,18 @@ const Game = (() => {
         // left diagonal check
         if ((board.boardCells[0][0].innerText === board.boardCells[1][1].innerText && board.boardCells[1][1].innerText === board.boardCells[2][2].innerText) && board.boardCells[0][0].innerText != "") {
             if (board.boardCells[0][0].innerText === player1.getPlayerMark()) {
-                player1.incrementScore();
-                dataManager.changeUserPoints(player1.getScore(), player2.getScore());
                 return player1;
             }
             else {
-                player2.incrementScore();
-                dataManager.changeUserPoints(player1.getScore(), player2.getScore());
                 return player2;
             }
         }
         // right diagonal check
         if ((board.boardCells[0][2].innerText === board.boardCells[1][1].innerText && board.boardCells[1][1].innerText === board.boardCells[2][0].innerText) && board.boardCells[0][2].innerText != "") {
             if (board.boardCells[0][2].innerText === player1.getPlayerMark()) {
-                player1.incrementScore();
-                dataManager.changeUserPoints(player1.getScore(), player2.getScore());
                 return player1;
             }
             else {
-                player2.incrementScore();
-                dataManager.changeUserPoints(player1.getScore(), player2.getScore());
                 return player2;
             }
         }
@@ -169,16 +153,6 @@ const Game = (() => {
         else { return false; }
     }
 
-    function playerPlayTurn(player) {
-        board.boardCells.forEach((row) => row.forEach((cell) => cell.addEventListener("click", player.markCell)));
-        if (checkWinConditionAndReturnWinner() === player) {
-            return true;
-        }
-        if (checkDrawCondition()) {
-            return true;
-        }
-    }
-
     const handleCellClick = (e) => {
         if (!gameActive) {
             return;
@@ -190,6 +164,8 @@ const Game = (() => {
             const winner = checkWinConditionAndReturnWinner();
             if (winner) {
                 gameActive = false;
+                winner.incrementScore();
+                dataManager.changeUserPoints(player1.getScore(), player2.getScore());
                 return;
             }
 
