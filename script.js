@@ -2,6 +2,7 @@ const cellBoxesList = document.querySelectorAll(".box");
 const cellBoxes = Array.from(cellBoxesList);
 const startButton = document.querySelector("#start-game-btn");
 const restartButton = document.querySelector(".restart");
+const playerNameTurn = document.querySelector(".player-turn-name");
 
 function Player(gameMarkSelection) {
     const playerMark = gameMarkSelection;
@@ -82,10 +83,13 @@ const Game = (() => {
         dataManager.changeUserPoints(player1.getScore(), player2.getScore());
         dataManager.changeUserNames();
         currentPlayer = player1;
+        playerNameTurn.innerText = currentPlayer.getPlayerMark();
         gameActive = true;
     }
 
     const reset = () => {
+        currentPlayer = player1;
+        playerNameTurn.innerText = currentPlayer.getPlayerMark();
         board.clearBoard();
         gameActive = true;
     }
@@ -168,11 +172,9 @@ const Game = (() => {
     function playerPlayTurn(player) {
         board.boardCells.forEach((row) => row.forEach((cell) => cell.addEventListener("click", player.markCell)));
         if (checkWinConditionAndReturnWinner() === player) {
-            alert(`winner is: ${player.getPlayerMark()}`);
             return true;
         }
         if (checkDrawCondition()) {
-            alert("draw");
             return true;
         }
     }
@@ -196,6 +198,7 @@ const Game = (() => {
             }
 
             currentPlayer = currentPlayer === player1 ? player2 : player1;
+            playerNameTurn.innerText = currentPlayer.getPlayerMark();
         }
     }
 
