@@ -36,9 +36,34 @@ function Board() {
     return { boardCells, clearBoard };
 }
 
+const DataHolder = () => {
+    let playerXName = "X";
+    let playerOName = "O";
+    let playerXScore = 0;
+    let playerOScore = 0;
+
+    function getNamesFromInputAreas() {
+        playerXName = document.querySelector("#player-x-name").value;
+        playerOName = document.querySelector("#player-o-name").value;        
+    };
+
+    function changeUserNames() {
+        getNamesFromInputAreas();
+        document.querySelector(".player-x-score-name").innerText = playerXName + ": ";
+        document.querySelector(".player-o-score-name").innerText = playerOName + ": ";
+    }
+
+
+    let getUserXName = () => playerXName;
+    let getUserOName = () => playerOName;
+
+    return { changeUserNames }
+};
+
 const Game = (() => {
 
     const board = Board();
+    const dataHolder = DataHolder();
     const player1 = Player("X");
     const player2 = Player("O");
 
@@ -47,6 +72,7 @@ const Game = (() => {
 
     const play = () => {
         board.clearBoard();
+        dataHolder.changeUserNames();
         currentPlayer = player1;
         gameActive = true;
     }
@@ -150,4 +176,3 @@ const Game = (() => {
 })();
 
 startButton.addEventListener("click", Game.play);
-restartButton.addEventListener("")

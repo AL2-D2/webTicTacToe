@@ -49,16 +49,16 @@ body {
     color: #fff;
 }
 
-.form button{
-    grid-column: 1/-1;    
+.form button {
+    grid-column: 1/-1;
     transition: all 0.2s ease;
 }
 
-.form button:hover{
+.form button:hover {
     background-color: #dfdfdf;
 }
 
-button:hover{
+button:hover {
     cursor: pointer;
 }
 
@@ -69,7 +69,7 @@ button:hover{
     border: none;
 }
 
-.form input:focus{
+.form input:focus {
     outline: 2px solid rgb(152, 140, 140);
 }
 
@@ -130,6 +130,6 @@ button:hover{
 
 .restart:hover {
     background-color: #fff;
-    border: 1px solid black;    
+    border: 1px solid black;
     color: var(--bgc);
 }
