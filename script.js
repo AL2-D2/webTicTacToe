@@ -36,7 +36,7 @@ function Board() {
     return { boardCells, clearBoard };
 }
 
-const DataHolder = () => {
+const DataManager = () => {
     let playerXName = "X";
     let playerOName = "O";
     let playerXScore = 0;
@@ -63,7 +63,7 @@ const DataHolder = () => {
 const Game = (() => {
 
     const board = Board();
-    const dataHolder = DataHolder();
+    const dataManager = DataManager();
     const player1 = Player("X");
     const player2 = Player("O");
 
@@ -72,7 +72,7 @@ const Game = (() => {
 
     const play = () => {
         board.clearBoard();
-        dataHolder.changeUserNames();
+        dataManager.changeUserNames();
         currentPlayer = player1;
         gameActive = true;
     }
