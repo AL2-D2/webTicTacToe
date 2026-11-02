@@ -3,6 +3,8 @@ const cellBoxes = Array.from(cellBoxesList);
 const startButton = document.querySelector("#start-game-btn");
 const restartButton = document.querySelector(".restart");
 const playerNameTurn = document.querySelector(".player-turn-name");
+const resultScreen = document.querySelector(".result-screen");
+const gameResult = document.querySelector(".game-result");
 
 function Player(gameMarkSelection) {
     const playerMark = gameMarkSelection;
@@ -68,6 +70,7 @@ const DataManager = () => {
 
 const Game = (() => {
 
+
     const board = Board();
     const dataManager = DataManager();
     const player1 = Player("X");
@@ -77,6 +80,7 @@ const Game = (() => {
     let gameActive = false;
 
     const play = () => {
+        resultScreen.classList.add("hidden");
         player1.resetScore();
         player2.resetScore();
         board.clearBoard();
@@ -88,6 +92,7 @@ const Game = (() => {
     }
 
     const reset = () => {
+        resultScreen.classList.add("hidden");
         currentPlayer = player1;
         playerNameTurn.innerText = currentPlayer.getPlayerMark();
         board.clearBoard();
@@ -166,10 +171,16 @@ const Game = (() => {
                 gameActive = false;
                 winner.incrementScore();
                 dataManager.changeUserPoints(player1.getScore(), player2.getScore());
+                gameResult.innerText = `${winner.getPlayerMark()} has WON!`;
+                resultScreen.classList.remove("hidden");
+                resultScreen.style.backgroundColor = "green";
                 return;
             }
 
             if (checkDrawCondition()) {
+                gameResult.innerText = `It's Tie!`;
+                resultScreen.classList.remove("hidden");
+                resultScreen.style.backgroundColor = "orange";
                 gameActive = false;
             }
 
