@@ -1,10 +1,12 @@
 const cellBoxesList = document.querySelectorAll(".box");
 const cellBoxes = Array.from(cellBoxesList);
 const startButton = document.querySelector("#start-game-btn");
-const restartButton = document.querySelector(".restart-button");
+const restartButton = document.querySelector(".restart");
 
 function Player(gameMarkSelection) {
     const playerMark = gameMarkSelection;
+
+    let score = 0;
 
     const markCell = (box) => {
         if (box.target.innerText === "") {
@@ -17,7 +19,11 @@ function Player(gameMarkSelection) {
     const getPlayerMark = () => {
         return playerMark;
     };
-    return { markCell, getPlayerMark };
+
+    const getScore = () => score;
+    const incrementScore = () => score++;
+    const resetScore = () => score = 0;
+    return { markCell, getPlayerMark, getScore, incrementScore, resetScore };
 }
 
 function Board() {
@@ -39,12 +45,10 @@ function Board() {
 const DataManager = () => {
     let playerXName = "X";
     let playerOName = "O";
-    let playerXScore = 0;
-    let playerOScore = 0;
 
     function getNamesFromInputAreas() {
         playerXName = document.querySelector("#player-x-name").value;
-        playerOName = document.querySelector("#player-o-name").value;        
+        playerOName = document.querySelector("#player-o-name").value;
     };
 
     function changeUserNames() {
@@ -53,11 +57,12 @@ const DataManager = () => {
         document.querySelector(".player-o-score-name").innerText = playerOName + ": ";
     }
 
+    function changeUserPoints(playerXScore, playerOScore) {
+        document.querySelector(".player-x-score").innerText = playerXScore;
+        document.querySelector(".player-o-score").innerText = playerOScore;
+    }
 
-    let getUserXName = () => playerXName;
-    let getUserOName = () => playerOName;
-
-    return { changeUserNames }
+    return { changeUserNames, changeUserPoints }
 };
 
 const Game = (() => {
@@ -71,9 +76,17 @@ const Game = (() => {
     let gameActive = false;
 
     const play = () => {
+        player1.resetScore();
+        player2.resetScore();
         board.clearBoard();
+        dataManager.changeUserPoints(player1.getScore(), player2.getScore());
         dataManager.changeUserNames();
         currentPlayer = player1;
+        gameActive = true;
+    }
+
+    const reset = () => {
+        board.clearBoard();
         gameActive = true;
     }
 
@@ -82,9 +95,13 @@ const Game = (() => {
             // horizontal checks
             if ((board.boardCells[i][0].innerText === board.boardCells[i][1].innerText && board.boardCells[i][1].innerText === board.boardCells[i][2].innerText) && board.boardCells[i][0].innerText != "") {
                 if (board.boardCells[i][0].innerText === player1.getPlayerMark()) {
+                    player1.incrementScore();
+                    dataManager.changeUserPoints(player1.getScore(), player2.getScore());
                     return player1;
                 }
                 else {
+                    player2.incrementScore();
+                    dataManager.changeUserPoints(player1.getScore(), player2.getScore());
                     return player2;
                 }
             }
@@ -94,9 +111,13 @@ const Game = (() => {
             // vertical checks
             if ((board.boardCells[0][i].innerText === board.boardCells[1][i].innerText && board.boardCells[1][i].innerText === board.boardCells[2][i].innerText && board.boardCells[0][i].innerText != "")) {
                 if (board.boardCells[0][i].innerText === player1.getPlayerMark()) {
+                    player1.incrementScore();
+                    dataManager.changeUserPoints(player1.getScore(), player2.getScore());
                     return player1;
                 }
                 else {
+                    player2.incrementScore();
+                    dataManager.changeUserPoints(player1.getScore(), player2.getScore());
                     return player2;
                 }
             }
@@ -104,18 +125,26 @@ const Game = (() => {
         // left diagonal check
         if ((board.boardCells[0][0].innerText === board.boardCells[1][1].innerText && board.boardCells[1][1].innerText === board.boardCells[2][2].innerText) && board.boardCells[0][0].innerText != "") {
             if (board.boardCells[0][0].innerText === player1.getPlayerMark()) {
+                player1.incrementScore();
+                dataManager.changeUserPoints(player1.getScore(), player2.getScore());
                 return player1;
             }
             else {
+                player2.incrementScore();
+                dataManager.changeUserPoints(player1.getScore(), player2.getScore());
                 return player2;
             }
         }
         // right diagonal check
         if ((board.boardCells[0][2].innerText === board.boardCells[1][1].innerText && board.boardCells[1][1].innerText === board.boardCells[2][0].innerText) && board.boardCells[0][2].innerText != "") {
             if (board.boardCells[0][2].innerText === player1.getPlayerMark()) {
+                player1.incrementScore();
+                dataManager.changeUserPoints(player1.getScore(), player2.getScore());
                 return player1;
             }
             else {
+                player2.incrementScore();
+                dataManager.changeUserPoints(player1.getScore(), player2.getScore());
                 return player2;
             }
         }
@@ -172,7 +201,8 @@ const Game = (() => {
 
     cellBoxes.forEach((cell) => cell.addEventListener("click", handleCellClick));
 
-    return { play };
+    return { play, reset };
 })();
 
 startButton.addEventListener("click", Game.play);
+restartButton.addEventListener("click", Game.reset);
